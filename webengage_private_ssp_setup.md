@@ -126,12 +126,3 @@ This header is required for CampaignHQ to authenticate incoming requests from We
 | Authorization Header | CampaignHQ API Key                |
 
 ---
-
-If you want next:
-
-* Event payload examples
-* Error handling & retries
-* WebEngage → CampaignHQ event mapping
-* A `/docs/webengage/` folder structure
-
-Just say 👍
