@@ -1,122 +1,137 @@
+---
 
-# Creating a Private SSP in WebEngage for CampaignHQ
+# WebEngage / Private SSP Setup Guide
 
-This document explains how to create a **Private SSP (Server-Side Provider)** in WebEngage to integrate it with **CampaignHQ**.
+This document outlines the steps required to configure a **Private SSP (Server-Side Provider)** in WebEngage to enable secure server-to-server communication with **CampaignHQ**.
+It also explains how to authenticate requests using CampaignHQ API keys.
 
-A Private SSP enables secure, server-to-server communication where WebEngage can send events or data to CampaignHQ using authenticated requests.
+---
 
+## 1. Creating a Private SSP in WebEngage
 
-## Prerequisites
+### A. Navigate to SSP Configuration
 
-* Access to the **WebEngage Dashboard**
-* Access to the **CampaignHQ Dashboard**
-* Permission to generate API keys in CampaignHQ
+1. Log in to the **WebEngage Dashboard**.
+2. Go to **Settings** → **Integrations** → **SSP**.
+3. Click **Add SSP**.
+4. Select **SSP Type** as **Private SSP**.
 
+---
 
-## Step 1: Navigate to SSP Configuration in WebEngage
+### B. Configure SSP Details
 
-In the WebEngage dashboard, go to:
+Fill in the following details:
 
-Settings → Integrations → SSP → Add SSP
-
-Select:
-
-* **SSP Type:** Private SSP
-
-
-
-## Step 2: Fill SSP Configuration Details
-
-### SSP
+#### SSP
 
 * **Private SSP**
 
-### Name Your Configuration
+#### Name Your Configuration
 
-Use a clear and descriptive name:
+* Example: `CampaignHQ Private SSP`
+  (You may include environment details like `Prod` or `Staging`.)
 
-* **CampaignHQ Private SSP**
+#### URL
 
-(Optionally include environment info like `CampaignHQ – Prod` or `CampaignHQ – Staging`.)
-
-
-### URL
-
-Enter the CampaignHQ endpoint that will receive requests from WebEngage.
+* Enter the CampaignHQ endpoint that will receive requests from WebEngage.
 
 Example:
 
-[https://api.campaignhq.co/webengage/ssp](https://api.campaignhq.co/webengage/ssp)
+```
+https://api.campaignhq.co/webengage/ssp
+```
 
-> Use the exact endpoint provided by CampaignHQ for WebEngage integration.
+> Use the exact endpoint provided by CampaignHQ.
 
-### Principal Entity ID
+---
+
+### C. Principal Entity ID
 
 #### What is Principal Entity ID?
 
-The **Principal Entity ID** represents the owning business entity or account in WebEngage under which this SSP operates. It is mainly used in enterprise or multi-entity WebEngage setups.
-
-In simple terms, it tells WebEngage **which account or entity is allowed to use this SSP**.
+The **Principal Entity ID** represents the owning business entity or account in WebEngage under which this SSP operates.
+It is primarily used in **enterprise or multi-entity WebEngage setups**.
 
 #### When is it required?
 
-* Multi-entity or multi-workspace WebEngage accounts
-* Enterprise or partner-level integrations
-* When WebEngage explicitly provides or mandates it
+* If your WebEngage account has multiple entities or workspaces
+* For enterprise or partner-level integrations
+* When WebEngage explicitly provides or mandates this value
 
 #### What should you enter?
 
 * If WebEngage has provided a Principal Entity ID → enter it here
-* If not provided or not required → **leave this field empty**
+* If not provided → **leave this field empty**
 
-> For most standard WebEngage accounts, this field can be safely left blank.
+> For most standard WebEngage accounts, this field is optional and can be left blank.
 
+---
 
-## Step 3: Add Authorization Header
+### D. Add Authorization Header
 
-Click **Add Header** and configure the following:
+1. Click **Add Header**.
+2. Configure the header as follows:
 
-### Header Key
+**Header Key**
 
+```
 Authorization
+```
 
-### Header Value
+**Header Value**
 
-`<YOUR_CAMPAIGNHQ_API_KEY>`
+```
+<YOUR_CAMPAIGNHQ_API_KEY>
+```
 
+This header is required for CampaignHQ to authenticate incoming requests from WebEngage.
 
-## Step 4: Generate API Key in CampaignHQ
+---
 
-To generate the API key:
+## 2. Generating API Key in CampaignHQ
 
-1. Go to
+### A. Generate API Key
+
+1. Log in to the **CampaignHQ Dashboard**.
+2. Go to **Settings** → **Integrations** → **API Keys**
+   or visit:
    [https://app.campaignhq.co/settings/integrations/api-keys/](https://app.campaignhq.co/settings/integrations/api-keys/)
-2. Click **Generate API Key**
-3. Copy the generated key
-4. Paste it as the value for the `Authorization` header in WebEngage
+3. Click **Generate API Key**.
+4. Copy the generated API key.
 
-This API key is used by CampaignHQ to authenticate requests coming from WebEngage.
+### B. Use API Key in WebEngage
 
-## Step 5: Save the SSP
+* Paste the generated API key as the **Authorization** header value while configuring the Private SSP in WebEngage.
 
-After filling all required details, click **Add SSP**.
+> Keep this API key secure. Do not expose it publicly.
 
-Your Private SSP is now successfully configured.
+---
+
+## 3. Save and Verify
+
+1. Review all the entered details.
+2. Click **Add SSP** to save the configuration.
+3. The Private SSP is now ready to be used for WebEngage ↔ CampaignHQ integration.
+
+---
 
 ## Summary
 
-| Field               | Value                                  |
-| ------------------- | -------------------------------------- |
-| SSP Type            | Private SSP                            |
-| Configuration Name  | CampaignHQ Private SSP                 |
-| URL                 | CampaignHQ WebEngage SSP endpoint      |
-| Principal Entity ID | Optional (leave empty unless provided) |
-| Header              | Authorization: CampaignHQ API Key      |
+| Field                | Value                             |
+| -------------------- | --------------------------------- |
+| SSP Type             | Private SSP                       |
+| Configuration Name   | CampaignHQ Private SSP            |
+| URL                  | CampaignHQ WebEngage SSP endpoint |
+| Principal Entity ID  | Optional                          |
+| Authorization Header | CampaignHQ API Key                |
 
-## Best Practices
+---
 
-* Use separate API keys for staging and production
-* Rotate API keys periodically for security
-* Do not expose the SSP endpoint publicly
-* Contact WebEngage support if Principal Entity ID is required later
+If you want next:
 
+* Event payload examples
+* Error handling & retries
+* WebEngage → CampaignHQ event mapping
+* A `/docs/webengage/` folder structure
+
+Just say 👍
