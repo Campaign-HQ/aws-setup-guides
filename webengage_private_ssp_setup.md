@@ -12,7 +12,7 @@ It also explains how to authenticate requests using CampaignHQ API keys.
 ### A. Navigate to SSP Configuration
 
 1. Log in to the **WebEngage Dashboard**.
-2. Go to **Settings** → **Integrations** → **SSP**.
+2. Go to **Data Platform** →**Integrations** **SMS** →**PrivateSSP**.
 3. Click **Add SSP**.
 4. Select **SSP Type** as **Private SSP**.
 
