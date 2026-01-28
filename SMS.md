@@ -17,15 +17,33 @@ This document outlines the steps required to configure AWS services to enable SM
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "CampaignHQ",
+            "Sid": "CampaignHQSMSVoice",
             "Effect": "Allow",
             "Action": [
                 "sms-voice:SendVoiceMessage",
                 "sms-voice:SendTextMessage",
                 "sms-voice:CreateConfigurationSet",
-                "sms-voice:CreateEventDestination"
+                "sms-voice:CreateEventDestination",
+                "sms-voice:DeleteEventDestination",
+                "sms-voice:UpdateEventDestination",
+                "sms-voice:DescribeConfigurationSets",
+                "sms-voice:DescribeEventDestinations"
             ],
             "Resource": "*"
+        },
+        {
+            "Sid": "CampaignHQSNS",
+            "Effect": "Allow",
+            "Action": [
+                "sns:CreateTopic",
+                "sns:DeleteTopic",
+                "sns:Subscribe",
+                "sns:Unsubscribe",
+                "sns:SetTopicAttributes",
+                "sns:GetTopicAttributes",
+                "sns:ListSubscriptionsByTopic"
+            ],
+            "Resource": "arn:aws:sns:*:*:CampaignHQ*"
         }
     ]
 }
