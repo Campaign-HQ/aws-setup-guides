@@ -35,17 +35,43 @@ This document outlines the steps required to set up a WhatsApp phone number and 
 1. Go to **IAM** → **Policies** → **Create policy**.
 2. Select the **JSON** tab and paste the following policy:
 
-```json
+```
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "CampaignHQ",
-      "Effect": "Allow",
-      "Action": ["social-messaging:SendWhatsAppMessage", "social-messaging:ListLinkedWhatsAppBusinessAccounts"],
-      "Resource": "arn:aws:social-messaging:*:{{aws_account_id}}:phone-number-id/*"
-    }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "CampaignHQ",
+            "Effect": "Allow",
+            "Action": [
+                "social-messaging:CreateWhatsAppMessageTemplateMedia",
+                "social-messaging:GetWhatsAppMessageTemplate",
+                "social-messaging:ListWhatsAppMessageTemplates",
+                "social-messaging:ListLinkedWhatsAppBusinessAccounts",
+                "social-messaging:SendWhatsAppMessage",
+                "social-messaging:ListWhatsAppTemplateLibrary",
+                "social-messaging:CreateWhatsAppMessageTemplate",
+                "social-messaging:UpdateWhatsAppMessageTemplate",
+                "social-messaging:DeleteWhatsAppMessageTemplate"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CampaignHQWhatsAppTemplateMediaS3",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:GetObjectVersion"
+            ],
+            "Resource": "arn:aws:s3:::<client>/*"
+        },
+        {
+            "Sid": "CampaignHQWhatsAppTemplateMediaBucketLocation",
+            "Effect": "Allow",
+            "Action": "s3:GetBucketLocation",
+            "Resource": "arn:aws:s3:::<client>"
+        }
+    ]
 }
 ```
 
@@ -98,16 +124,3 @@ This document outlines the steps required to set up a WhatsApp phone number and 
    - Save the changes.
   
 ![Event Destination Setup](https://drive.google.com/uc?export=view&id=1I-2zAo7i4oS5NAPcL2uombOXLKYagnzI)
-
----
-
-## 4. Meta App Setup for Template Management
-
-To enable CampaignHQ to manage WhatsApp message templates through their platform, a Meta app needs to be linked to your business account.
-
-### Requirements:
-
-- Admin access to your **Meta Business Account**
-- Admin access to your **Meta Developer Account**
-
-A representative from CampaignHQ will assist and guide you through this setup. You can schedule the call here - [Schedule Call](https://www.campaignhq.co/schedule-demo/)
