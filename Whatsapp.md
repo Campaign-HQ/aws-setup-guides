@@ -53,7 +53,7 @@ This document outlines the steps required to set up a WhatsApp phone number and 
                 "social-messaging:UpdateWhatsAppMessageTemplate",
                 "social-messaging:DeleteWhatsAppMessageTemplate"
             ],
-            "Resource": "arn:"
+            "Resource": "arn:<client>"
         },
         {
             "Sid": "CampaignHQWhatsAppTemplateMediaS3",
